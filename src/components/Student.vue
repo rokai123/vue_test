@@ -15,7 +15,7 @@
 				sex:'男'
 			}
 		},
-		methods:{
+		methods:{//阿三发射点
 			sendStuNameToApp(){
 				this.$emit('atguigu',this.name,'123','456')
 			}
