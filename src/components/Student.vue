@@ -15,7 +15,7 @@
 				sex:'男'
 			}
 		},
-		methods:{//阿三发射点
+		methods:{//阿三发射点和谷歌
 			sendStuNameToApp(){
 				this.$emit('atguigu',this.name,'123','456')
 			}
