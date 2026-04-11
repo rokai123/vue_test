@@ -13,14 +13,14 @@ export default {
             title: ''
         }
     },
-    props: ['addTodo'],
+    // props: ['addTodo'],
     methods: {
         add(){
-            if(!this.title.trim()){
+            if(!this.title.trim()){//输入不能为空
                 return;
             }
             const todoObj = {id:nanoid(),title:this.title,done:false};
-            this.addTodo(todoObj);
+            this.$emit('addTodo', todoObj);
             this.title = ''; 
         }
     },
