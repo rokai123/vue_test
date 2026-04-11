@@ -17,7 +17,7 @@
 		},
 		methods:{
 			sendStuNameToSchool(){
-				this.x.$emit('getStuName', this.name)
+				this.$bus.$emit('getStuName', this.name)
 			}
 		}
 	}

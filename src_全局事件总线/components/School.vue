@@ -15,10 +15,13 @@
 			}
 		},
 		mounted(){
-			this.x.$on('getStuName',(stuName)=>{
+			this.$bus.$on('getStuName',(stuName)=>{
 				console.log('学校组件接收到学生姓名：',stuName)
 			})
-		}
+		},
+		beforeDestroy(){
+			this.$bus.$off('getStuName')
+		},
 	}
 </script>
 
