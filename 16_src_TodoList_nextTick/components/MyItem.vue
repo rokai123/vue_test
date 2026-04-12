@@ -11,10 +11,17 @@
 				type="checkbox"
 				v-model="todo.done"
 			/> --> 
-            <span>{{ todo.title }}</span>
+            <span v-show="!todo.isEdite">{{ todo.title }}</span>
+			<input 
+				type="text"
+				v-show="todo.isEdite"
+				:value="todo.title"
+				@blur="handleBlur(todo,$event)"
+				ref="inputTitle"
+			>
         </label>
         <button class="btn btn-danger" @click="handleDelete(todo.id)">删除</button>
-		<button class="btn btn-danger">编辑</button>
+		<button class="btn btn-edit" @click="handleEdite(todo)" v-show="!todo.isEdite">编辑</button>
     </li>
 </template>
 
@@ -32,7 +39,24 @@ export default {
 			//this.deleteTodo(id);
 			// this.$bus.$emit('deleteTodo', id);
 			pubsub.publish('deleteTodo', id);
+		},
+		handleEdite(todo){
+			// todo.isEdite = true;
+			if (Object.prototype.hasOwnProperty.call(todo, 'isEdite')) {
+				todo.isEdite = true
+			} else {
+				this.$set(todo, 'isEdite', true)
+			}
+			this.$nextTick(() => {
+				this.$refs.inputTitle.focus();
+			})
+		},
+		//失去焦点回调（真正执行修改逻辑）
+		handleBlur(todo,e){
+			todo.isEdite = false;
+			this.$bus.$emit('updateTodo',todo.id,e.target.value);
 		}
+
 	}
 }
 </script>
